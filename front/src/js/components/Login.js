@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { Card, CardContent, CardActions, Button, Grid, Typography, TextField, Box, InputAdornment, FormControl, InputLabel, OutlinedInput, IconButton } from '@mui/material';
+import { Card, CardContent, CardActions, Button, Grid, Typography, TextField, Box, InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff, AccountCircle } from '@mui/icons-material';
 import axios from 'axios';
 
 function Login() {
 	const [showPassword, setShowPassword] = React.useState(false);
+	const [idValue, setId] = React.useState('');
+	const [passwordValue, setPassword] = React.useState('');
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -12,10 +14,18 @@ function Login() {
 	  event.preventDefault();
 	};
 
+	const saveUserId = e => {
+		setId(e.target.value);
+	};
+
+	const saveUserPassword = e => {
+		setPassword(e.target.value);
+	};
+
 const login = () => {
 	let sendData = JSON.stringify({
-		id: "Test",
-		password: "password"
+		id: idValue,
+		password: passwordValue,
 	});
 	axios({
 		method: "POST",
@@ -66,6 +76,8 @@ const login = () => {
 									),
 									}}
 									variant="standard"
+									value={idValue}
+            						onChange={saveUserId}
 								/>
 							</Box>
 							<Box mt={2}>
@@ -88,6 +100,8 @@ const login = () => {
 										),
 										}}
 										variant="standard"
+										value={passwordValue}
+										onChange={saveUserPassword}
 								/>
 							</Box>
 					</CardContent>
