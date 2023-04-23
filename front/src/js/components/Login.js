@@ -1,4 +1,3 @@
-import 'css/components/Login.css';
 import * as React from 'react';
 import { Card, CardContent, CardActions, Button, Grid, Typography, TextField, Box, InputAdornment, FormControl, InputLabel, OutlinedInput, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff, AccountCircle } from '@mui/icons-material';
@@ -32,7 +31,7 @@ function Login() {
 						sx={{
 						}}
 					>
-							<Typography variant="h5">WelCome !</Typography>
+							<Typography variant="h5">Welcome !</Typography>
 							<Box mt={2}>
 								<TextField
 									id="input-with-icon-textfield"
