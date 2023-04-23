@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Card, CardContent, CardActions, Button, Grid, Typography, TextField, Box, InputAdornment, FormControl, InputLabel, OutlinedInput, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff, AccountCircle } from '@mui/icons-material';
+import axios from 'axios';
 
 function Login() {
 	const [showPassword, setShowPassword] = React.useState(false);
@@ -10,6 +11,27 @@ function Login() {
 	const handleMouseDownPassword = (event) => {
 	  event.preventDefault();
 	};
+
+const login = () => {
+	let sendData = JSON.stringify({
+		id: "Test",
+		password: "password"
+	});
+	axios({
+		method: "POST",
+		url: 'http://localhost:8080/rest/login',
+		data: sendData,
+		// header에서 JSON 타입의 데이터라는 것을 명시
+		headers: {'Content-type': 'application/json'}
+	}).then((res)=>{
+		alert("성공");
+		// API로 부터 받은 데이터 출력
+		console.log(res.data);
+	}).catch(error=>{
+		console.log("실패");
+		console.log(error);
+	});
+}
 
 	return (
 			<Grid
@@ -67,31 +89,10 @@ function Login() {
 										}}
 										variant="standard"
 								/>
-							{/* <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-								<InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-								<OutlinedInput
-									id="outlined-adornment-password"
-									type={showPassword ? 'text' : 'password'}
-									endAdornment={
-									<InputAdornment position="end">
-										<IconButton
-										aria-label="toggle password visibility"
-										onClick={handleClickShowPassword}
-										onMouseDown={handleMouseDownPassword}
-										edge="end"
-										>
-										{showPassword ? <VisibilityOff /> : <Visibility />}
-										</IconButton>
-									</InputAdornment>
-									}
-									label="Password"
-								/>
-								</FormControl> */}
-
 							</Box>
 					</CardContent>
 					<CardActions>
-						<Button size="small">Login</Button>
+						<Button size="small" onClick={login}>Login</Button>
 					</CardActions>
 				</Card>
 			</Grid>
