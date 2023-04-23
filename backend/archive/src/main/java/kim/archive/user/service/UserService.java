@@ -18,6 +18,7 @@ public class UserService {
 
 	public boolean login(UserDto userDto) {
 		UserEntity userEntity = userRepository.findOne(QUserEntity.userEntity.id.eq(userDto.getId())).orElse(null);
-		return userEntity != null;
+
+		return userEntity != null && userEntity.getPassword().equals(userDto.getPassword());
 	}
 }
