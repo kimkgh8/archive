@@ -8,9 +8,11 @@ import Dashboard from "./components/Dashboard";
 import Record from "./components/Record";
 import RecordModify from "./components/RecordModify";
 import RecordDetail from "./components/RecordDetail";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   return <Router>
+		{window.location.pathname === "/" || window.location.pathname === "/login" ? null : <Sidebar />}
 		<Routes>
 			<Route path="/" element={ <Login />} />
 			<Route path="/login" element={ <Login />} />
