@@ -2,11 +2,13 @@ import * as React from 'react';
 import { Card, CardContent, CardActions, Button, Grid, Typography, TextField, Box, InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff, AccountCircle } from '@mui/icons-material';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 	const [showPassword, setShowPassword] = React.useState(false);
 	const [idValue, setId] = React.useState('');
 	const [passwordValue, setPassword] = React.useState('');
+	const movePage = useNavigate();
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -34,10 +36,12 @@ const login = () => {
 		// header에서 JSON 타입의 데이터라는 것을 명시
 		headers: {'Content-type': 'application/json'}
 	}).then((res)=>{
-		alert("성공");
-		// API로 부터 받은 데이터 출력
-		console.log(res.data);
-	}).catch(error=>{
+		if (res.data) {
+			movePage('/dashboard');
+		} else {
+			alert("faild login");
+		}
+	}).catch(error=>	{
 		console.log("실패");
 		console.log(error);
 	});
