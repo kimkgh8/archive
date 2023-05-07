@@ -9,7 +9,7 @@ function Sidebar() {
 	]
 
 	return (
-		<div className="sidebar">
+		<div className="side-bar">
 			{items.map((item, index) => {
 				return (
 					<Link to={item.path} key={index}>
